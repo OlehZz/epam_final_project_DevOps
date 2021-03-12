@@ -1,8 +1,6 @@
 ---
 - name: setup jenkins node
 hosts: tag_Name_Jenkins_node
-vars:
-    ansible_ssh_private_key_file: "/home/ubuntu/.ssh/jenkins_aws.pem"
 tasks:
     - name: install git
       apt:
