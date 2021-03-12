@@ -1,6 +1,7 @@
 ---
 - name: setup jenkins node
   hosts: tag_Name_Jenkins_node
+  become: yes
   tasks:
     - name: install git
       apt:
