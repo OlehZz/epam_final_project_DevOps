@@ -1,7 +1,7 @@
 ---
 - name: setup jenkins node
-hosts: tag_Name_Jenkins_node
-tasks:
+  hosts: tag_Name_Jenkins_node
+  tasks:
     - name: install git
       apt:
         name: git
