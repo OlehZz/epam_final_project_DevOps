@@ -7,7 +7,7 @@
   tasks:
 
     - name: setup db access
-      script: /home/ubuntu/jenkins/workspace/setup jenkins node/ansible/script.sh
+      script: /home/ubuntu/jenkins/workspace/'setup jenkins node'/ansible/script.sh
     
     - name: Write variable to file
       ansible.builtin.replace:
