@@ -1,8 +1,10 @@
 ---
 - name: ssm
-  hosts: tag_Name_Jenkins_node
+  hosts: localhost
   vars:
     dbpass: "{{ lookup('aws_ssm', '/dev/mysql', region='us-east-1', aws_profile='ansible') }}"
+  
+  hosts: tag_Name_Jenkins_node
 
   tasks:
 
