@@ -11,7 +11,7 @@
     
     - name: Write variable to file
       ansible.builtin.replace:
-              path: /home/ubuntu/footgo/src/main/resources/application.properties
+              path: /home/ubuntu/jenkins/workspace/'setup jenkins node'/footgo/src/main/resources/application.properties
               after: 'spring.datasource.password='
               before: '# try to auto create DB MySQL'
               regexp: '^.+'
