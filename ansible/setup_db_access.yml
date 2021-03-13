@@ -3,17 +3,15 @@
   hosts: localhost
   vars:
     dbpass: "{{ lookup('aws_ssm', '/dev/mysql', region='us-east-1', aws_profile='ansible') }}"
-  
-  hosts: tag_Name_Jenkins_node
 
   tasks:
 
     - name: setup db access
-      script: /home/ubuntu/jenkins/workspace/'setup jenkins node'/ansible/script.sh
+      script: /home/ubuntu/jenkins/workspace/setup jenkins node/ansible/script.sh
     
     - name: Write variable to file
       ansible.builtin.replace:
-              path: /home/ubuntu/jenkins/workspace/'setup jenkins node'/footgo/src/main/resources/application.properties
+              path: /home/ubuntu/jenkins/workspace/setup jenkins node/footgo/src/main/resources/application.properties
               after: 'spring.datasource.password='
               before: '# try to auto create DB MySQL'
               regexp: '^.+'
