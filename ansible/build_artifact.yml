@@ -1,0 +1,31 @@
+---
+
+- name: setup jenkins node
+  hosts:
+    localhost:
+      vars:
+        ansible_connection: local
+  become: yes
+
+  tasks:
+    - name: setup files
+      git:
+        repo: 'git@github.com:OlehZz/FootGo.git'
+        version: 'release/1.0.0'
+        dest: /home/ubuntu/jenkins/footgo
+    - name: setup db access
+      script: script.sh
+    - name: Set MAVEN_OPTS
+      lineinfile: 
+        dest: /etc/environment 
+        state: present 
+        regexp: '^MAVEN_OPTS'
+        line: 'MAVEN_OPTS=-Xmx1024m'
+    - name: compile footgo app
+      shell: sudo mvn clean package
+      args:
+        chdir: /home/ubuntu/jenkins/footgo
+        #executable: /bin/bash
+      environment:
+        MAVEN_OPTS: '-Xmx1024m -XX:MaxPermSize=128m'
+        MAVEN_HOME: /usr/share/maven

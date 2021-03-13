@@ -1,0 +1,21 @@
+---
+- name: ssm
+  hosts: tag_Name_Jenkins_node
+  vars:
+    dbpass: "{{ lookup('aws_ssm', '/dev/mysql', region='us-east-1', aws_profile='ansible') }}"
+
+  tasks:
+
+    - name: setup db access
+      script: script.sh
+    
+    - name: Write variable to file
+      ansible.builtin.replace:
+              path: /home/ubuntu/footgo/src/main/resources/application.properties
+              after: 'spring.datasource.password='
+              before: '# try to auto create DB MySQL'
+              regexp: '^.+'
+              replace: "{{dbpass}}"
+
+    - name: lookup ssm parameter store in the current region
+      debug: msg="value of dbpass is {{ dbpass }}"
