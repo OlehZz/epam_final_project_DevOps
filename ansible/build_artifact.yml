@@ -4,6 +4,13 @@
   become: yes
 
   tasks:
+    - name: Set MAVEN_OPTS
+      lineinfile:
+        dest: /etc/environment
+        state: present
+        regexp: '^MAVEN_OPTS'
+        line: 'MAVEN_OPTS=-Xmx1024m'
+        
     - name: compile footgo app
       shell: sudo mvn clean package
       register: maven
@@ -12,4 +19,4 @@
       environment:
         MAVEN_OPTS: '-Xmx1024m'
         MAVEN_SKIP_RC: 'true'
-    - debug: msg="{{ maven.stdout }}"
+    - debug: msg="{{ maven.stdout_lines }}"
