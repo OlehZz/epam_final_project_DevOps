@@ -5,17 +5,17 @@ pipeline {
     }
         stages {
             stage('checkout playbook for setup jenkins node') {
-                agent { 
+                agent {
                     label 'master'
                 }
             steps {
-               checkout([$class: 'GitSCM', branches: [[name: '*/main']], 
-               extensions: [], userRemoteConfigs: [[credentialsId: 'github_ssh_key', 
+               checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+               extensions: [], userRemoteConfigs: [[credentialsId: 'github_ssh_key',
                url: 'git@github.com:OlehZz/epam_final_project_DevOps.git']]])
             }
         }
            stage('setup node') {
-                agent { 
+                agent {
                     label 'master'
                 }
             steps {
@@ -23,20 +23,26 @@ pipeline {
             }
         }
         stage('setup files for artifact') {
-                agent { 
+                agent {
                     label 'maven'
                 }
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], 
-                extensions: [], userRemoteConfigs: [[credentialsId: 'github_ssh_key', 
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                extensions: [], userRemoteConfigs: [[credentialsId: 'github_ssh_key',
                 url: 'git@github.com:OlehZz/epam_final_project_DevOps.git']]])
                 
-                checkout([$class: 'GitSCM', branches: [[name: '*/release/1.0.0']], 
-                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'footgo']], 
+                checkout([$class: 'GitSCM', branches: [[name: '*/release/1.0.0']],
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'footgo']],
                 userRemoteConfigs: [[credentialsId: 'github_ssh_key', url: 'git@github.com:OlehZz/FootGo.git']]])
                 
                 sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/ansible/setup_db_access.yml'
             }
         }
+        stage('build artifact') {
+                agent {
+                    label 'maven'
+                }
+            steps {
+                sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/ansible/build_artifact.yml'
     }
 }
