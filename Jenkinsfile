@@ -44,5 +44,7 @@ pipeline {
                 }
             steps {
                 sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/ansible/build_artifact.yml'
+            }
+        }
     }
 }
