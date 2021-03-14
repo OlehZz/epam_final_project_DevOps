@@ -1,9 +1,6 @@
 ---
 - name: setup maven
-  hosts:
-    localhost:
-      vars:
-        ansible_connection: local
+  hosts: localhost
   become: yes
 
   tasks:
