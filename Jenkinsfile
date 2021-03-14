@@ -4,21 +4,15 @@ pipeline {
         timestamps()
     }
         stages {
-            stage('checkout playbook for setup jenkins node') {
-                agent {
-                    label 'master'
-                }
-            steps {
-               checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-               extensions: [], userRemoteConfigs: [[credentialsId: 'github_ssh_key',
-               url: 'git@github.com:OlehZz/epam_final_project_DevOps.git']]])
-            }
-        }
            stage('setup node') {
                 agent {
                     label 'master'
                 }
             steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                extensions: [], userRemoteConfigs: [[credentialsId: 'github_ssh_key',
+                url: 'git@github.com:OlehZz/epam_final_project_DevOps.git']]])
+
                 sh 'ansible-playbook ansible/setup_node.yml'
             }
         }
