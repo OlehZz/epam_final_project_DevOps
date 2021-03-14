@@ -6,9 +6,10 @@
   tasks:
     - name: compile footgo app
       shell: sudo mvn clean package
+      register: maven
       args:
-        chdir: /home/ubuntu/jenkins/workspace/'setup jenkins node'/footgo/
+        chdir: /home/ubuntu/jenkins/workspace/setup jenkins node/footgo/
       environment:
         MAVEN_OPTS: '-Xmx1024m'
         MAVEN_SKIP_RC: 'true'
-       
+    - debug: msg="{{ maven.stdout }}"
