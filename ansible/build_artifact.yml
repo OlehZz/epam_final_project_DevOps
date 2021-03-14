@@ -13,3 +13,5 @@
         MAVEN_OPTS: '-Xmx1024m'
         MAVEN_SKIP_RC: 'true'
     - debug: msg="{{ maven.stdout_lines }}"
+    - name: create docker image
+      shell: sudo docker build Dockerfile -t olehzz/footgo
