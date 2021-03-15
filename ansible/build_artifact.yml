@@ -15,6 +15,10 @@
     - debug: msg="{{ maven.stdout_lines }}"
     - name: create docker image
       shell: sudo docker build "/home/ubuntu/jenkins/workspace/setup jenkins node/" -t olehzz_footgo
+
+    - name: Login to AWS
+      shell: "$(aws ecr get-login --no-include-email --region us-east-1)"
+
     - name: Push image to registry
       docker_image:
         name: olehzz_footgo
