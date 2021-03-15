@@ -10,6 +10,7 @@ data "aws_ami" "latest_ubuntu18" {
 resource "aws_instance" "jenkins_ubuntu_18" {
   ami           = data.aws_ami.latest_ubuntu18.id
   instance_type = "t2.micro"
+  iam_instance_profile = "jenkins-aws-role"
   key_name = var.PRIVATE_KEY
   vpc_security_group_ids = [var.webserver_sg]
   subnet_id   = var.public_subnet_id
@@ -24,6 +25,7 @@ resource "aws_instance" "jenkins_ubuntu_18" {
 resource "aws_instance" "jenkins_node" {
   ami           = data.aws_ami.latest_ubuntu18.id
   instance_type = "t2.micro"
+  iam_instance_profile = "jenkins-aws-role"
   key_name = var.PRIVATE_KEY
   vpc_security_group_ids = [var.webserver_sg]
   subnet_id   = var.public_subnet_id
