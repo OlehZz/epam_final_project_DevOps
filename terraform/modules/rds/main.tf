@@ -18,6 +18,15 @@ data "aws_ssm_parameter" "db_footgo_pass" {
   depends_on = [aws_ssm_parameter.db_footgo_pass]
 }
 
+resource "aws_ecr_repository" "epam_project" {
+  name                 = "olehzz_footgo"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+
 resource "aws_db_instance" "mysql_db" {
   allocated_storage      = 20
   storage_type           = "gp2"
