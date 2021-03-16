@@ -40,5 +40,13 @@ pipeline {
                 sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/ansible/build_artifact.yml'
             }
         }
+        stage('deploy artifact') {
+                agent {
+                    label 'maven'
+                }
+            steps {
+                sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/ansible/deploy_artifact.yml'
+            }
+        }
     }
 }
