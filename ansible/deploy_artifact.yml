@@ -34,7 +34,7 @@
       uri:
         url: http://3.94.250.88:8080/
         method: get
-        statuscode: [200]
+        status_code: [200]
       
         
     # - name: Stop docker
