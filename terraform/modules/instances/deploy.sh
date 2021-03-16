@@ -8,4 +8,4 @@ sudo usermod -a -G docker ubuntu
 sudo apt-get install -y awscli
 sudo $(aws ecr get-login --no-include-email --region us-east-1)
 sudo docker pull 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
-sudo docker run -p 8080:8080 622371100744.dkr.ecr.us-ea-1.amazonaws.com/olehzz_footgo
+sudo docker run -p 8080:8080 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
