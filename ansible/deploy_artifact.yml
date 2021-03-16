@@ -16,7 +16,7 @@
         pull: yes
         tag: latest
 
-     name: Stop docker
+    - name: Stop docker
       shell: docker stop $(docker ps -q)
     
     - name: Login to AWS
