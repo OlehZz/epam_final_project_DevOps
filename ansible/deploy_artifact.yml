@@ -29,6 +29,13 @@
         published_ports: 8080:8080
         image: 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
         detach: True
+
+    - name: check app
+      uri:
+        url: http://3.94.250.88:8080/
+        method: get
+        statuscode: [200]
+      
         
     # - name: Stop docker
     #   shell: docker stop $(docker ps -q)
