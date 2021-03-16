@@ -10,7 +10,7 @@
       args:
         chdir: /home/ubuntu/jenkins/workspace/setup jenkins node/footgo/
       environment:
-        MAVEN_OPTS: '-Xmx1024m'
+        MAVEN_OPTS: '-Xmx800m'
         MAVEN_SKIP_RC: 'true'
     - debug: msg="{{ maven.stdout_lines }}"
     - name: create docker image
