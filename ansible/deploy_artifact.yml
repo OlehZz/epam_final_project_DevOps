@@ -16,11 +16,23 @@
         pull: yes
         tag: latest
 
-    - name: Stop docker
-      shell: docker stop $(docker ps -q)
+    - name: Stop app
+      docker_container:
+        name:  footgo
+        state: absent
+       
 
-    - name: Stop docker
-      shell: docker rm $(docker ps -q)
+    - name: Run app
+      docker_container:
+        name: footgo
+        image: 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
+        detach: True
+        
+    # - name: Stop docker
+    #   shell: docker stop $(docker ps -q)
+
+    # - name: Remove docker
+    #   shell: docker rm $(docker ps -q)
     
-    - name: Login to AWS
-      shell: docker run -d --name footgo -p 8080:8080 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
+    # - name: docker run footgo
+    #   shell: docker run -d --name footgo -p 8080:8080 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
