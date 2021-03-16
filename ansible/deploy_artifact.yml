@@ -26,6 +26,7 @@
       docker_container:
         name: footgo
         state: started
+        exposed_ports: 8080
         image: 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
         detach: True
         
