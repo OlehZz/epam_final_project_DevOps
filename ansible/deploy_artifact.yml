@@ -17,7 +17,7 @@
         tag: latest
 
      name: Stop docker
-        #  shell: docker stop $(docker ps -q)
+      shell: docker stop $(docker ps -q)
     
     - name: Login to AWS
       shell: docker run -p 8080:8080 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
