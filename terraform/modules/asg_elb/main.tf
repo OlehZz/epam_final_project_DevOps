@@ -19,6 +19,10 @@ resource "aws_autoscaling_group" "webservers" {
   min_size             = 1
   max_size             = 2
   desired_capacity     = 1
+
+  lifecycle {
+    create_before_destroy = true
+  }
   #min_elb_capacity = 1
   health_check_type   = "EC2"
   load_balancers      = [aws_elb.webserver.name]

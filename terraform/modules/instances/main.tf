@@ -38,9 +38,14 @@ resource "aws_instance" "jenkins_node" {
 
 #ec2 for ASG
 resource "aws_launch_configuration" "web" {
-  name            = "Webserver"
+  name        = "Webserver"
   key_name        = var.PRIVATE_KEY
   image_id        = data.aws_ami.latest_ubuntu18.id
   instance_type   = "t2.micro"
+  iam_instance_profile = "jenkins-aws-role"
   security_groups = [var.webserver_sg]
+  user_data              = file("modules/instances/deploy.sh")
+  lifecycle {
+    create_before_destroy = true
+  }
 }
