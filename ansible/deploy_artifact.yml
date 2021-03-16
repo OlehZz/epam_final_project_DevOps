@@ -25,6 +25,7 @@
     - name: Run app
       docker_container:
         name: footgo
+        state: started
         image: 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
         detach: True
         
