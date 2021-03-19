@@ -51,19 +51,10 @@ pipeline {
             steps {
                 sh "docker build -t footgo:${env.BUILD_ID} /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/"
                 sh "docker tag footgo:${env.BUILD_ID} footgo:latest"
+                sh "$(aws ecr get-login --no-include-email --region us-east-1)"
+                sh "docker push 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo:latest"
             }
         }
-
-        stage('Push Container') {
-            agent {
-                node { label 'maven' }
-                }
-            steps {
-                    docker.withRegistry('https://622371100744.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-ecr-cred') {
-                        docker.image('footgo').push('latest')
-                    }
-                }
-            }
         stage('deploy artifact') {
                 agent {
                     label 'maven'
