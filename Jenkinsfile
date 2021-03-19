@@ -36,9 +36,13 @@ pipeline {
                 agent {
                     label 'maven'
                 }
-            steps {
-                sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/ansible/build_artifact.yml'
+                environment {
+                    MAVEN_OPTS = '-Xmx800m'
             }
+            steps {
+                sh 'mvn -f /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/footgo/pom.xml clean package'
+            }
+                
         }
         stage('deploy artifact') {
                 agent {

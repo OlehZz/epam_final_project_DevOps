@@ -24,4 +24,4 @@
         name: olehzz_footgo
         repository: 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
         push: yes
-        tag:
+        tag: 
