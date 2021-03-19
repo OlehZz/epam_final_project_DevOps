@@ -34,16 +34,14 @@ pipeline {
         }
         stage('build artifact') {
                 agent {
-                    node {
-                        label 'maven'
-                        customWorkspace '/home/ubuntu/jenkins/workspace/\'setup jenkins node\'/footgo/'
-                    }
+                    label 'maven'
                 }
                 environment {
                     MAVEN_OPTS = '-Xmx800m'
+
             }
             steps {
-                sh 'mvn clean package'
+                sh 'sudo mvn -f /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/footgo/clean package'
             }
                 
         }
