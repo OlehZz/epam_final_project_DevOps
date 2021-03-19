@@ -32,13 +32,13 @@
 
     - name: check app
       uri:
-        url: http://18.232.114.252:8080
-        method: get
+        url: "http://18.232.114.252:8080"
+        method: GET
         status_code: [200]
       register: result
       until: result.status == 200
       retries: 10
-      delay: 10
+      delay: 5
 
       
         
