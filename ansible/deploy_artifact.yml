@@ -11,8 +11,8 @@
 
     - name: Pull image from ecr
       docker_image:
-        name: 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
-        repository: 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
+        name: 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo
+        repository: 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo
         pull: yes
         tag: latest
 
@@ -27,7 +27,7 @@
         name: footgo
         state: started
         published_ports: 8080:8080
-        image: 622371100744.dkr.ecr.us-east-1.amazonaws.com/olehzz_footgo
+        image: 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo
         detach: True
 
     - name: check app
