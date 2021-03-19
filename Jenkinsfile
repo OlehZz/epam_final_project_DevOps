@@ -41,8 +41,7 @@ pipeline {
 
             }
             steps {
-                sh 'cd /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/footgo/'
-                sh 'sudo mvn clean package'
+                sh 'cd /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/footgo/ & sudo mvn clean package'
             }
                 
         }
