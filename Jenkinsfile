@@ -50,7 +50,7 @@ pipeline {
                 }
             steps {
                 sh "docker build -t footgo_{env.BUILD_ID} /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/"
-                sh "docker tag footgo_${env.BUILD_ID} 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo:latest"
+                sh "docker tag footgo_${env.BUILD_ID}:latest 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo:latest"
                 sh "${aws ecr get-login --no-include-email --region us-east-1}"
                 sh "docker push 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo:latest"
             }
