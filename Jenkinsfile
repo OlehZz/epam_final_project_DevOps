@@ -54,14 +54,14 @@ pipeline {
             }
         }
 
-        stage('Make Container') {
+        stage('Push Container') {
                 agent {
                     node {
                     label 'maven'
-                    }
-                }
                     docker.withRegistry('https://622371100744.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-ecr-cred') {
     docker.image('footgo').push('latest')
+                        }
+                    }
                 }
             }
         stage('deploy artifact') {
