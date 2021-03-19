@@ -51,9 +51,11 @@ pipeline {
             steps {
                 sh "docker build -t footgo:${env.BUILD_ID} /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/"
                 sh "docker tag footgo:${env.BUILD_ID} footgo:latest"
-                docker.withRegistry('https://622371100744.dkr.ecr.us-east-1.amazonaws.com', 
+                script {
+                    docker.withRegistry('https://622371100744.dkr.ecr.us-east-1.amazonaws.com', 
                 'ecr:us-east-1:aws-ecr-cred') {
                 sh "docker push 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo:latest"
+                    }
                 }
             }
         }
