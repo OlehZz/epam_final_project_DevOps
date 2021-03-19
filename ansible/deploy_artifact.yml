@@ -32,7 +32,7 @@
 
     - name: check app
       uri:
-        url: "http://18.232.114.252:8080"
+        url: "http://18.232.114.252:8080/gametable"
         method: GET
         status_code: [200]
       register: result
