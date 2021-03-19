@@ -43,7 +43,13 @@ pipeline {
             steps {
                 sh ' mvn -f /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/footgo/pom.xml clean package'
             }
-                
+        stage('Make Container') {
+            steps {
+                sh "docker build -t footgo:${env.BUILD_ID} /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/"
+                sh "docker tag footgo:${env.BUILD_ID} 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo:latest"
+                sh "$(aws ecr get-login --no-include-email --region us-east-1)"
+                sh "docker push 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo:latest"
+            }
         }
         stage('deploy artifact') {
                 agent {
