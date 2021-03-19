@@ -54,7 +54,7 @@ pipeline {
                 script {
                     docker.withRegistry('https://622371100744.dkr.ecr.us-east-1.amazonaws.com', 
                 'ecr:us-east-1:aws-ecr-cred') {
-                sh "docker push 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo:latest"
+                sh "docker push footgo:latest"
                     }
                 }
             }
