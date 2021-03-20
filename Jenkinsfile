@@ -22,7 +22,8 @@ pipeline {
                 }
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-                extensions: [], userRemoteConfigs: [[credentialsId: 'github_ssh_key',
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '\'setup jenkins node\'']], 
+                userRemoteConfigs: [[credentialsId: 'github_ssh_key',
                 url: 'git@github.com:OlehZz/epam_final_project_DevOps.git']]])
                 
                 checkout([$class: 'GitSCM', branches: [[name: '*/release/1.0.0']],
