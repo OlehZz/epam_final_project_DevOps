@@ -43,7 +43,7 @@ pipeline {
                 sh ' mvn -f /home/ubuntu/jenkins/workspace/\'deploy footgo app\'/footgo/pom.xml clean package'
             }
         }
-        stage('Make Container') {
+        stage('Make image') {
                 agent {
                     label 'maven'
                 }
@@ -58,7 +58,7 @@ pipeline {
                 }
             }
         }
-        stage('deploy artifact') {
+        stage('deploy webapp') {
                 agent {
                     label 'maven'
                 }
