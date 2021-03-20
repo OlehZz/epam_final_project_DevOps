@@ -32,9 +32,10 @@
 
     - name: check app
       uri:
-        url: "http://10.0.1.81:8080"
-        method: GET
-        status_code: [200]
+        url: "http://18.205.148.72:8080/"
+        return_content: yes
+#        method: GET
+#        status_code: [200]
       register: result
       until: result.status == 200
       retries: 10

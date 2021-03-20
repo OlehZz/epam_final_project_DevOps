@@ -49,6 +49,11 @@ resource "aws_internet_gateway" "main-gw" {
   }
 }
 
+#eip for nat
+resource "aws_eip" "eip_for_elb" {
+    vpc      = true
+}
+
 resource "aws_route_table" "public_subnet" {
   vpc_id = aws_vpc.vpc-main.id
   route {
