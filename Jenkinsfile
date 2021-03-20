@@ -28,7 +28,7 @@ pipeline {
                 extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'footgo']],
                 userRemoteConfigs: [[credentialsId: 'github_ssh_key', url: 'git@github.com:OlehZz/FootGo.git']]])
                 
-                sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/ansible/setup_db_access.yml'
+                sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'deploy footgo app\'/ansible/setup_db_access.yml'
             }
         }
         stage('build artifact') {
@@ -40,7 +40,7 @@ pipeline {
 
             }
             steps {
-                sh ' mvn -f /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/footgo/pom.xml clean package'
+                sh ' mvn -f /home/ubuntu/jenkins/workspace/\'deploy footgo app\'/footgo/pom.xml clean package'
             }
         }
         stage('Make Container') {
@@ -48,7 +48,7 @@ pipeline {
                     label 'maven'
                 }
             steps {
-                sh "docker build -t footgo:${env.BUILD_ID} /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/"
+                sh "docker build -t footgo:${env.BUILD_ID} /home/ubuntu/jenkins/workspace/\'deploy footgo app\'/"
                 sh "docker tag footgo:${env.BUILD_ID} 622371100744.dkr.ecr.us-east-1.amazonaws.com/footgo:latest"
                 script {
                     docker.withRegistry('https://622371100744.dkr.ecr.us-east-1.amazonaws.com', 
@@ -63,7 +63,7 @@ pipeline {
                     label 'maven'
                 }
             steps {
-                sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'setup jenkins node\'/ansible/deploy_artifact.yml'
+                sh 'ansible-playbook /home/ubuntu/jenkins/workspace/\'deploy footgo app\'/ansible/deploy_artifact.yml'
             }
         }
     }
