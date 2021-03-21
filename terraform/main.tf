@@ -29,10 +29,10 @@ module "asg_elb" {
 }
 
 module "instances" {
-  source       = "./modules/instances"
-  webserver_sg = module.security-group.webserver_sg
-  AMI_ID = var.AMI_ID
-  PRIVATE_KEY = var.PRIVATE_KEY
+  source           = "./modules/instances"
+  webserver_sg     = module.security-group.webserver_sg
+  AMI_ID           = var.AMI_ID
+  PRIVATE_KEY      = var.PRIVATE_KEY
   public_subnet_id = module.vpc-main.dev_public_subnet_id
 }
 

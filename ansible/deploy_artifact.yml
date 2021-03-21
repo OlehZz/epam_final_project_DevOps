@@ -32,7 +32,7 @@
 
     - name: check app
       uri:
-        url: "http://3.90.9.41:8080/"
+        url: "http://webserver-ELB-1947603415.us-east-1.elb.amazonaws.com:8080/"
         return_content: yes
 #        method: GET
 #        status_code: [200]
