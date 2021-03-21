@@ -51,7 +51,7 @@ resource "aws_internet_gateway" "main-gw" {
 
 #eip for nat
 resource "aws_eip" "eip_for_elb" {
-    vpc      = true
+  vpc = true
 }
 
 resource "aws_route_table" "public_subnet" {

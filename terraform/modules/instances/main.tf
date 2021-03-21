@@ -8,12 +8,12 @@ data "aws_ami" "latest_ubuntu18" {
 }
 # jenkins server
 resource "aws_instance" "jenkins_ubuntu_18" {
-  ami           = "ami-013f17f36f8b1fefb"
-  instance_type = "t2.micro"
-  iam_instance_profile = "jenkins-aws-role"
-  key_name = var.PRIVATE_KEY
+  ami                    = "ami-013f17f36f8b1fefb"
+  instance_type          = "t2.micro"
+  iam_instance_profile   = "jenkins-aws-role"
+  key_name               = var.PRIVATE_KEY
   vpc_security_group_ids = [var.webserver_sg]
-  subnet_id   = var.public_subnet_id
+  subnet_id              = var.public_subnet_id
   user_data              = file("modules/instances/install.sh")
   tags = {
     Name  = "Jenkins for epam project"
@@ -23,12 +23,12 @@ resource "aws_instance" "jenkins_ubuntu_18" {
 
 # jenkins node
 resource "aws_instance" "jenkins_node" {
-  ami           = "ami-013f17f36f8b1fefb"
-  instance_type = "t2.micro"
-  iam_instance_profile = "jenkins-aws-role"
-  key_name = var.PRIVATE_KEY
+  ami                    = "ami-013f17f36f8b1fefb"
+  instance_type          = "t2.micro"
+  iam_instance_profile   = "jenkins-aws-role"
+  key_name               = var.PRIVATE_KEY
   vpc_security_group_ids = [var.webserver_sg]
-  subnet_id   = var.public_subnet_id
+  subnet_id              = var.public_subnet_id
   user_data              = file("modules/instances/node_install.sh")
   tags = {
     Name  = "Jenkins node"
@@ -38,13 +38,13 @@ resource "aws_instance" "jenkins_node" {
 
 #ec2 for ASG
 resource "aws_launch_configuration" "web" {
-  name          = "Webserver"
-  key_name        = var.PRIVATE_KEY
-  image_id        = data.aws_ami.latest_ubuntu18.id
-  instance_type   = "t2.micro"
+  name                 = "Webserver"
+  key_name             = var.PRIVATE_KEY
+  image_id             = data.aws_ami.latest_ubuntu18.id
+  instance_type        = "t2.micro"
   iam_instance_profile = "jenkins-aws-role"
-  security_groups = [var.webserver_sg]
-  user_data              = file("modules/instances/deploy.sh")
+  security_groups      = [var.webserver_sg]
+  user_data            = file("modules/instances/deploy.sh")
   lifecycle {
     create_before_destroy = true
   }

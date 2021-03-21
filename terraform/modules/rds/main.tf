@@ -38,6 +38,6 @@ resource "aws_db_instance" "mysql_db" {
   vpc_security_group_ids = [var.mysql_sg]
   username               = "footgo"
   password               = data.aws_ssm_parameter.db_footgo_pass.value
-  skip_final_snapshot  = true
-  apply_immediately = true
+  skip_final_snapshot    = true
+  apply_immediately      = true
 }
